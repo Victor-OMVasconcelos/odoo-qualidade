@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    ----------------------------------------------
+        VIEWS DE GERENCIA: LOGS DE ARQUIVOS
+    ----------------------------------------------
+
+    <record id="logs_view_form" model="ir.ui.view">
+        <field name="name">logs.view.form</field>
+        <field name="model">record.mudar.log</field>
+        <field name="arch" type="xml">
+            <form string="Log" create ="0" edit="0">
+                <header>
+                    <button name="action_back_to_gerenciar"
+                            type="object"
+                            string="Back to Gerenciar Arquivos"
+                            class="oe_highlight" />
+                </header>
+                <sheet>
+                    <group>
+                        <field name="model_name"/>
+                        <field name="record_id"/>
+                        <field name="action_type"/>
+                        <field name="user_id"/>
+                        <field name="data_mudancas"/>
+                        <field name="mudancas"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+     <record id="logs_tree_view" model="ir.ui.view">
+        <field name="name">logs.tree.view</field>
+        <field name="model">record.mudar.log</field>
+        <field name="arch" type="xml">
+            <list string="Logs" class="custom_class" create="0" edit="0">
+                <field name="model_name"/>
+                <field name="record_id"/>
+                <field name="action_type"/>
+                <field name="user_id"/>
+            </list>
+        </field>
+    </record>
+
+    ----------------------------------------------
+        VIEWS DE GERENCIA: GERENCIAR ARQUIVOS
+    ----------------------------------------------
+
+    <record id="tree_view_gerenciador" model="ir.ui.view">
+        <field name="name">tree.view.gerenciador</field>
+        <field name="model">qualidade.gerenciar</field>
+        <field name="arch" type="xml">
+            <list string="Processos" class="custom_class">
+                <button name="action_ver_log"
+                        type="object"
+                        string="Ver log"
+                        class="oe_highlight" />
+                <field name="processo"/>
+                <field name="linha_producao"/>
+                <field name="diametro"/>
+                <field name="arquivo"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="form_view_gerenciador" model="ir.ui.view">
+        <field name="name">form.view.gerenciador</field>
+        <field name="model">qualidade.gerenciar</field>
+        <field name="arch" type="xml">
+            <form string="Inserir" class="cc">
+                <header>
+                    <button name="revisar" type="object" class="oe_highlight" string="Revisar" invisible="estagio != 'rascunho'"/>
+                    <button name="publicar" type="object" class="oe_highlight" string="Publicar" invisible="estagio != 'revisao'"/>
+                    <field name="estagio" widget="statusbar" readonly="1"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="processo" required="1"/>
+                        <field name="linha_producao" required="1"/>
+                        <field name="diametro" required="1"/>
+                        <field name="arquivo" required="1" widget="image"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+     <record id="kanban_view_gerenciador" model="ir.ui.view">
+        <field name="name">kanban.view.gerenciador</field>
+        <field name="model">qualidade.gerenciar</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="estagio" default_order="estagio" class="o_kanban_mobile" sample="1" quick_create="false">
+                <progressbar field="estagio"
+                   colors='{"publicado": "success", "revisao": "default", "rascunho": "info"}'/>
+                <templates>
+                    <t t-name="card">
+                        <div t-attf-class="oe_kanban_content">
+                            Processo:
+                            <field name="processo"/>
+                            <br/>
+                            Linha:
+                            <field name="linha_producao"/>
+                            <br/>
+                            Diametro:
+                            <field name="diametro"/>
+                        </div>
+                        <footer>
+                            <div>
+                                <field name="estagio"
+                                    widget="label_selection"
+                                    options="{'classes': {'rascunho': 'info', 'revisao': 'default', 'publicado': 'success'}}" class="ms-auto"/>
+                            </div>
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
+       </field>
+    </record>
+
+    <record id="search_view_gerenciar" model="ir.ui.view">
+        <field name="name">search.view.gerenciar</field>
+        <field name="model">qualidade.gerenciar</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="processo"/>
+                <field name="linha_producao"/>
+                <field name="diametro"/>
+                <filter name="diametro_filter" string="Diâmetro" domain="[('diametro', '=', '19')]"/>
+                <filter name="diametro_filter_22" string="Diâmetro 22" domain="[('diametro', '=', '22')]"/>
+                <filter name="diametro_filter_25" string="Diâmetro 25" domain="[('diametro', '=', '25')]"/>
+                <filter name="diametro_filter_30" string="Diâmetro 30" domain="[('diametro', '=', '30')]"/>
+                <filter name="diametro_filter_40" string="Diâmetro 40" domain="[('diametro', '=', '40')]"/>
+                <filter name="diametro_filter_35" string="Diâmetro 35" domain="[('diametro', '=', '35')]"/>
+                <filter name="diametro_filter_50" string="Diâmetro 50" domain="[('diametro', '=', '50')]"/>
+                <filter name="diametro_filter_60" string="Diâmetro 60" domain="[('diametro', '=', '60')]"/>
+                <filter name="linha_producao_filter_1" string="Linha 1" domain="[('linha_producao', '=', '1')]"/>
+                <filter name="linha_producao_filter_2" string="Linha 2" domain="[('linha_producao', '=', '2')]"/>
+                <filter name="linha_producao_filter_3" string="Linha 3" domain="[('linha_producao', '=', '3')]"/>
+                <filter name="linha_producao_filter_4" string="Linha 4" domain="[('linha_producao', '=', '4')]"/>
+                <filter name="linha_producao_filter_5" string="Linha 5" domain="[('linha_producao', '=', '5')]"/>
+                <filter name="linha_producao_filter_6" string="Linha 6" domain="[('linha_producao', '=', '6')]"/>
+                <filter name="linha_producao_filter_7" string="Linha 7" domain="[('linha_producao', '=', '7')]"/>
+                <filter name="linha_producao_filter_8" string="Linha 8" domain="[('linha_producao', '=', '8')]"/>
+                <filter name="process_filter" string="Extrusão" domain="[('processo', '=', 'extrusao')]"/>
+                <group string="Group by">
+                    <filter name="por_processo" string="Processo" context="{'group_by': 'processo' }"/>
+                    <filter name="por_linha" string="Linha" context="{'group_by': 'linha_producao' }"/>
+                    <filter name="por_diametro" string="Diametro" context="{'group_by': 'diametro' }"/>
+                </group>
+                <searchpanel>
+                    <field name="estagio"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+    ----------------------------------------------
+        VIEWS DE GERENCIA: GERENCIAR SOLICITACOES
+    ----------------------------------------------
+    <record id="form_view_solicitacao" model="ir.ui.view">
+        <field name="name">form.view.solicitacao</field>
+        <field name="model">qualidade.solicitacao</field>
+        <field name="arch" type="xml">
+            <form string="Solicitações" create="0" edit="0">
+                <header>
+                    <button name="solicitacao_deferido" type="object" class="oe_highlight" string="Deferir" invisible="situacao != 'avaliando'"/>
+                    <button name="solicitacao_indeferido" type="object" string="Indeferir" invisible="situacao != 'avaliando'"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="linha_producao"/>
+                        <field name="data"/>
+                        <field name="solicitante"/>
+                        <field name="parame_alterado"/>
+                        <field name="valor_novo"/>
+                        <field name="motivo"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="list_view_solicitacao" model="ir.ui.view">
+        <field name="name">list.view.solicitacao</field>
+        <field name="model">qualidade.solicitacao</field>
+        <field name="arch" type="xml">
+            <list string="Solicitações" default_order="situacao" create="0">
+                <field name="linha_producao"/>
+                <field name="data"/>
+                <field name="solicitante"/>
+                <field name="motivo"/>
+            </list>
+        </field>
+    </record>
+    ----------------------------------------------
+        VIEWS DE OPERARIO: VISUALIZAR ARQUIVOS
+    ----------------------------------------------
+    <record id="form_view_visualizar" model="ir.ui.view">
+        <field name="name">form.view.visualizar</field>
+        <field name="model">visualizar.arquivo</field>
+        <field name="arch" type="xml">
+            <form string="Parâmetros" class="cc" edit="0" create="0">
+                <header>
+                    <button name="solicitar_alteracao"
+                            type="object"
+                            string="Solicitar Alteração"
+                            class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="processo"/>
+                        <field name="linha_producao"/>
+                        <field name="diametro"/>
+                        <field name="arquivo" widget="image"/>
+                        <field name="estagio" invisible="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="tree_view_visualizar" model="ir.ui.view">
+        <field name="name">tree.view.visualizar</field>
+        <field name="model">visualizar.arquivo</field>
+        <field name="arch" type="xml">
+            <list string="Processos" class="custom_class" create="0">
+                <field name="processo"/>
+                <field name="linha_producao"/>
+                <field name="diametro"/>
+            </list>
+        </field>
+    </record>
+
+     <record id="search_view_visualizar" model="ir.ui.view">
+        <field name="name">search.view.visualizar</field>
+        <field name="model">visualizar.arquivo</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="processo"/>
+                <field name="linha_producao"/>
+                <field name="diametro"/>
+                <group string="Group by">
+                    <filter name="por_processo" string="Processo" context="{'group_by': 'processo' }"/>
+                    <filter name="por_linha" string="Linha" context="{'group_by': 'linha_producao' }"/>
+                    <filter name="por_diametro" string="Diametro" context="{'group_by': 'diametro' }"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    ----------------------------------------------
+        VIEWS DE OPERARIO: SOLICITAR ALTERACAO
+    ----------------------------------------------
+    <record id="form_view_solicitar" model="ir.ui.view">
+        <field name="name">form.view.solicitar</field>
+        <field name="model">qualidade.solicitar</field>
+        <field name="arch" type="xml">
+            <form string="Solicitar alteração">
+                <sheet>
+                    <group>
+                        <field name="processo"/>
+                        <field name="linha_producao"/>
+                        <field name="diametro"/>
+                        <field name="data"/>
+                        <field name="solicitante" placeholder="Ex: fernadno..."/>
+                        <field name="parame_alterado" placeholder="Ex: diâmetro dosador..."/>
+                        <field name="valor_novo" placeholder="Ex: 9..."/>
+                        <field name="motivo" placeholder="Ex: defeito ferramental..."/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="list_view_solicitar" model="ir.ui.view">
+        <field name="name">list.view.solicitar</field>
+        <field name="model">qualidade.solicitar</field>
+        <field name="arch" type="xml">
+            <list string="Solicitado" default_order="situacao">
+                <field name="processo"/>
+                <field name="data"/>
+                <field name="solicitante"/>
+                <field name="situacao" widget="label_selection" 
+                                       options="{'classes': {'aguardando': 'warning','avaliando': 'info', 'indeferido': 'danger', 
+                                       'deferido': 'success'}}" class="ms-auto"/>
+                <field name="responsavel"/>
+                <field name="motivo" decoration-danger="situacao=='indeferido'" decoration-success="situacao=='deferido'"/>
+            </list>
+        </field>
+    </record>
+    ----------------------------------------------
+        ACTIONS: GERENCIADOR
+    ----------------------------------------------
+    <record id="acao_gerenciador" model="ir.actions.act_window">
+        <field name="name">Gerenciador</field>
+        <field name="res_model">qualidade.gerenciar</field>
+        <field name="view_mode">list,kanban,form,search</field>
+        <field name="view_id" ref="search_view_gerenciar"/>
+        <field name="context">{'group_by': ['estagio']}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face"> Insira o primeiro arquivo
+            </p>
+        </field>
+    </record>
+
+
+    ----------------------------------------------
+        ACTIONS: SOLICITAR
+    ----------------------------------------------
+    <record id="acao_solicitar" model="ir.actions.act_window">
+        <field name="name">Solicitar</field>
+        <field name="res_model">qualidade.solicitar</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face"> Faça sua solicitação
+            </p>
+        </field>
+    </record>
+
+    ----------------------------------------------
+        ACTIONS: LOGS
+    ----------------------------------------------
+
+    <record id="acao_logs_globais" model="ir.actions.act_window">
+        <field name="name">Logs de mudancas</field>
+        <field name="res_model">record.mudar.log</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('model_name', '=', 'qualidade.gerenciar')]</field>
+        <field name="target">current</field>
+    </record>
+
+    ----------------------------------------------
+        ACTIONS: SOLICITACAO
+    ----------------------------------------------
+
+    <record id="acao_solicitacao" model="ir.actions.act_window">
+        <field name="name">Solicitacao</field>
+        <field name="res_model">qualidade.solicitacao</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face"> Nenhuma solicitação
+            </p>
+        </field>
+    </record>
+
+    ----------------------------------------------
+        ACTIONS: VISUALIZAR
+    ----------------------------------------------
+
+    <record id="acao_visualizar" model="ir.actions.act_window">
+        <field name="name">Parâmetros de processos</field>
+        <field name="res_model">visualizar.arquivo</field>
+        <field name="view_mode">list,form,search</field>
+        <field name="context">{'group_by': ['processo', 'linha_producao', 'diametro']}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face"> Nenhum parâmetro disponível
+            </p>
+        </field>
+    </record>
+
+    ----------------------------------------------
+        MENU PRINCIPAL
+    ----------------------------------------------
+
+    <menuitem
+        id="menu_qualidade_principal"
+        name="Operação"/>
+
+    ----------------------------------------------
+        MENUS: OPERARIO
+    ----------------------------------------------
+
+    <menuitem
+        id="menu_qualidade"
+        name="Operarios"
+        parent="menu_qualidade_principal"/>
+
+    <menuitem
+        id="menu_gerenciar"
+        name="Parâmetros de processo"
+        parent="menu_qualidade"
+        action="acao_visualizar"/>
+
+    <menuitem
+        id="menu_solicitar"
+        name="Solicitar alteração"
+        parent="menu_qualidade"
+        action="acao_solicitar"/>
+
+    ----------------------------------------------
+        MENUS: GERENCIA
+    ----------------------------------------------
+
+    <menuitem
+        id="menu_gerencia"
+        name="Gerencia"
+        parent="menu_qualidade_principal"/>
+
+    <menuitem
+        id="menu_alterar"
+        name="Gerenciar parâmetros"
+        parent="menu_gerencia"
+        action="acao_gerenciador"/>
+
+    <menuitem
+        id="menu_solicitacao"
+        name="Solicitações"
+        parent="menu_gerencia"
+        action="acao_solicitacao"/>
+
+    <menuitem
+        id="menu_logs"
+        name="Logs"
+        parent="menu_gerencia"
+        action="acao_logs_globais"
+        groups="base.group_no_one"/>
+
+    ----------------------------------------------
+        WIZARD
+    ----------------------------------------------
+
+    <record id="view_solicitar_indeferido_wizard" model="ir.ui.view">
+        <field name="name">wizard.indeferido.form</field>
+        <field name="model">wizard.indeferido</field>
+        <field name="arch" type="xml">
+            <form string="Indeferir">
+                <group>
+                    <field name="motivo" placeholder="Adicione o motivo de indeferir a solicitacao"/>
+                </group>
+                <footer>
+                    <button name="action_confirm" string="Confirmar" type="object" class="oe_highlight"/>
+                    <button string="Cancelar" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_qualidade_solicitar_wizard" model="ir.ui.view">
+        <field name="name">qualidade.solicitar.wizard.form</field>
+        <field name="model">qualidade.solicitar.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Solicitar Alteração">
+                <group>
+                    <field name="processo" readonly="1"/>
+                    <field name="linha_producao" readonly="1"/>
+                    <field name="diametro" readonly="1"/>
+                    <field name="solicitante" readonly="1"/>
+                    <field name="data" readonly="1"/>
+                    <field name="parame_alterado"/>
+                    <field name="valor_novo"/>
+                    <field name="motivo"/>
+                </group>
+                <footer>
+                    <button string="Enviar para Análise" type="object" name="enviar_para_analise" class="btn-primary"/>
+                    <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+
+    ----------------------------------------------
+        CRONJOB
+    ----------------------------------------------
+
+    <record id="deletar_auto_cron" model="ir.cron">
+        <field name="name">Auto Deletar Records</field>
+        <field name="model_id" ref="model_qualidade_solicitar"/>
+        <field name="state">code</field>
+        <field name="code">model.deletar_auto()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="nextcall">2025-04-05 00:00:00</field>
+    </record>
+
+</odoo>

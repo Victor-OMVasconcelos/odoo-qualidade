@@ -1,0 +1,44 @@
+.custom_class {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.custom_class table thead tr {
+    background-color: #566be2;
+    color: #ffffff;
+    text-align: left;
+}
+
+.custom_class table th,
+.custom_class table td {
+    padding: 5px 8px;
+}
+
+.custom_class table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.custom_class table tbody tr:nth-of-type(even) {
+    background-color: #a5d6ff;
+}
+
+.custom_class table tbody tr:last-of-type {
+    border-bottom: 2px solid #566be2;
+}
+
+.custom_class table tbody tr.active-row {
+    font-weight: bold;
+    color: #566be2;
+}
+
+.cc .o_statusbar_buttons button {
+    background-color: #566be2;
+}
+
+.custom_class .ui_sortable .o_data_row {
+    background-color: #a5d6ff;
+}

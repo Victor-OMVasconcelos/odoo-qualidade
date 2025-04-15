@@ -102,10 +102,6 @@ class Gerenciar(models.Model):
 
     
     def abrir_todos_logs(self):
-        _logger.info("Opening logs with domain: %s", [
-            ('model_name', '=', self._name),
-            ('record_id', '=', self.ids) 
-        ])
         return {
             'type': 'ir.actions.act_window',
             'name': 'Log de mudancas',

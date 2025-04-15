@@ -52,10 +52,9 @@
         <field name="model">qualidade.gerenciar</field>
         <field name="arch" type="xml">
             <list string="Processos" class="custom_class">
-                <button name="action_ver_log"
-                        type="object"
-                        string="Ver log"
-                        class="oe_highlight" />
+                <header>
+                    <button name="action_ver_log" type="object" string="Ver logs"/>
+                </header>
                 <field name="processo"/>
                 <field name="linha_producao"/>
                 <field name="diametro"/>
@@ -254,7 +253,7 @@
         <field name="name">form.view.solicitar</field>
         <field name="model">qualidade.solicitar</field>
         <field name="arch" type="xml">
-            <form string="Solicitar alteração">
+            <form string="Solicitar alteração" create="0" edit="0">
                 <sheet>
                     <group>
                         <field name="processo"/>
@@ -275,7 +274,7 @@
         <field name="name">list.view.solicitar</field>
         <field name="model">qualidade.solicitar</field>
         <field name="arch" type="xml">
-            <list string="Solicitado" default_order="situacao">
+            <list string="Solicitado" default_order="situacao" create="0">
                 <field name="processo"/>
                 <field name="data"/>
                 <field name="solicitante"/>

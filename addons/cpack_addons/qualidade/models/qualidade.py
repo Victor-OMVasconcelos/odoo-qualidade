@@ -19,6 +19,7 @@ class Gerenciar(models.Model):
         action = self.env.ref('qualidade.acao_logs_globais').read()[0]
         return action
 
+
     @api.model
     def create(self,vals):
         record = super(Gerenciar, self).create(vals)
@@ -106,7 +107,7 @@ class Gerenciar(models.Model):
             'name': 'Log de mudancas',
             'res_model': 'record.mudar.log',
             'view_mode': 'tree,form',
-            'domain': [('model_name', '=', self._name),],
+            'domain': [('model_name', '=', self._name)],
             'target': 'current', 
         }
     

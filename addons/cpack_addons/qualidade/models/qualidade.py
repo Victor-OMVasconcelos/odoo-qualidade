@@ -3,6 +3,9 @@ from odoo.exceptions import UserError
 from odoo.tools import human_size
 from datetime import timedelta
 import base64
+import logging
+
+_logger = logging.getLogger(__name__)
 
 class Gerenciar(models.Model):
     _name = 'qualidade.gerenciar'
@@ -15,9 +18,6 @@ class Gerenciar(models.Model):
     estagio = fields.Selection([('rascunho','Rascunho'),('revisao','Revisao'),('publicado','Publicado')], string = "Estágio", tracking=True,copy=False,default='rascunho')
     color = fields.Integer()
 
-    def action_ver_log(self):
-        action = self.env.ref('qualidade.acao_logs_globais').read()[0]
-        return action
 
 
     @api.model
@@ -102,12 +102,16 @@ class Gerenciar(models.Model):
 
     
     def abrir_todos_logs(self):
+        _logger.info("Opening logs with domain: %s", [
+            ('model_name', '=', self._name),
+            ('record_id', '=', self.ids) 
+        ])
         return {
             'type': 'ir.actions.act_window',
             'name': 'Log de mudancas',
             'res_model': 'record.mudar.log',
-            'view_mode': 'tree,form',
-            'domain': [('model_name', '=', self._name)],
+            'view_mode': 'list,form',
+            'domain': [('model_name', '=', self._name), ('record_id', 'in', self.ids )],
             'target': 'current', 
         }
     

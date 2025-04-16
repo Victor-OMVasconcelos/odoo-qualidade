@@ -1,0 +1,19 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+manage_gerenciar,manage gerenciar,model_qualidade_gerenciar,qualidade.group_manage_qualidade,1,1,1,0
+manage_solicitacoes,manage solicitacoes,model_qualidade_solicitacao,qualidade.group_manage_qualidade,1,1,1,1
+manage_logs,manage logs,model_record_mudar_log,qualidade.group_manage_qualidade,1,0,0,0
+manage_wizard_indeferido,manage wizard indeferido,model_wizard_indeferido,qualidade.group_manage_qualidade,1,1,1,1
+manage_visualizar,manage visualizar,model_visualizar_arquivo,qualidade.group_manage_qualidade,1,0,0,0
+
+operarios_visualizar,operarios visualizar,model_visualizar_arquivo,qualidade.group_operario_qualidade,1,0,0,0
+operarios_soliciar,operarios solicitar,model_qualidade_solicitar,qualidade.group_operario_qualidade,1,1,1,0
+operarios_wizard, operarios wizard,model_qualidade_solicitar_wizard,qualidade.group_operario_qualidade,1,1,1,1
+operario_solicitacoes,operario solicitacoes,model_qualidade_solicitacao,qualidade.group_operario_qualidade,0,0,1,1
+
+admin_gerenciar,admin gerenciar,model_qualidade_gerenciar,qualidade.group_admin_qualidade,1,1,1,1
+admin_solicitacoes,admin solicitacoes,model_qualidade_solicitacao,qualidade.group_admin_qualidade,1,1,1,1
+admin_visualizar,admin visualizar,model_visualizar_arquivo,qualidade.group_admin_qualidade,1,1,1,1
+admin_solicitar,admin solicitar,model_qualidade_solicitar,qualidade.group_admin_qualidade,1,1,1,1
+admin_logs,admin logs,model_record_mudar_log,qualidade.group_admin_qualidade,1,1,1,1
+admin_wizard_indeferido,admin wizard indeferido,model_wizard_indeferido,qualidade.group_admin_qualidade,1,1,1,1
+admin_wizard_solicitar,admin wizard solicitar,model_qualidade_solicitar_wizard,qualidade.group_admin_qualidade,1,1,1,1

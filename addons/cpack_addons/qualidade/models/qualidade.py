@@ -5,7 +5,6 @@ from datetime import timedelta
 import base64
 import logging
 
-_logger = logging.getLogger(__name__)
 
 class Gerenciar(models.Model):
     _name = 'qualidade.gerenciar'
@@ -157,9 +156,6 @@ class Solicitar(models.Model):
     situacao = fields.Selection([('aguardando','Aguardando'),('avaliando','Avaliando'),('deferido','Deferido'),('indeferido','Indeferido')],string="Situacao", tracking=True,copy=False,default='aguardando')
     editavel = fields.Integer(string="Editavel", compute="_procurar_editavel")
     responsavel = fields.Char(string='Responsavel')
-
-
-            
 
     def deletar_auto(self):
         for r in self:

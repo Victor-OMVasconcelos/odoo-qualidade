@@ -1,1 +1,2 @@
-from . import qualidade, wizard
+from . import qualidade
+from . import wizard
